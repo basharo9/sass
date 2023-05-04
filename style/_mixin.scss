@@ -1,0 +1,46 @@
+@mixin flexCenter(){
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   max-height: 400px;
+   margin: 30px 10px;
+   outline: 1px solid rgb(4, 4, 4) ;
+   border: 7px solid antiquewhite;
+   border-radius: 9px;
+}
+
+#cta {
+   @include flexCenter();
+   background-color: aqua;
+}
+#cta2 {
+   @include flexCenter(); 
+   background-color: $textColorTwo;
+}
+#cta3 {
+   @extend #cta ;
+   background-color : lighten( $secendColo, 30%);
+}
+
+@function setTextColor ($color){
+    @if(lightness($color) > 75 ){
+      @return #333
+    }
+    @else{
+      @return #ddd
+    }
+}
+
+
+@mixin setBgColor( $color ) {
+   background-color: $color;
+   color: setTextColor($textColorOne);
+}
+
+#cta4 {
+   @extend #cta2 ;
+   @include setBgColor($textColorOne);
+   h2 {
+      color: setTextColor($textColorOne);
+   }
+}
